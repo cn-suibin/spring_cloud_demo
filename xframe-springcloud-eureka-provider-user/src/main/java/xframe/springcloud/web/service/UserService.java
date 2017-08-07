@@ -45,10 +45,10 @@ public class UserService{
 			  commandProperties = {  
 	                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "400"),//指定多久超时，单位毫秒。超时进fallback
 	                    
-	                    @HystrixProperty(name = "circuitBreaker.enabled", value = "false"),//是否开启熔断机制
-	                    @HystrixProperty(name = "circuitBreaker.forceClosed", value = "true"),//强制关闭开关
+	                    //@HystrixProperty(name = "circuitBreaker.enabled", value = "false"),//是否开启熔断机制
+	                    //@HystrixProperty(name = "circuitBreaker.forceClosed", value = "true"),//强制关闭开关
 	     
-	                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000"),//熔断后的重试时间窗口
+	                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "5000"),//熔断后的重试时间窗口，熔断器默认工作时间,默认:5秒.熔断器中断请求5秒后会进入半打开状态,放部分流量过去重试
 	                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),	  // 熔断器在整个统计时间内是否开启的阀值，默认20秒。也就是10秒钟内至少请求20次，熔断器才发挥起作用
 	                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "10"),//判断熔断的阈值，默认值50，表示在一个统计窗口内有50%的请求处理失败，会触发熔断
 	  })
@@ -70,7 +70,7 @@ public class UserService{
 	   * @return 默认的用户
 	   */
 	  public String fallback(Long id) {
-		//报错！超时都会触发熔断器！
+		//报错会强制触发熔断器！
 		UserService.LOGGER.info("异常发生，进入fallback方法，接收的参数：id = {}", id);
 	    return "这是findbyid熔断器！";
 	  }

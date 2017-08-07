@@ -16,12 +16,14 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 @SpringBootApplication
 @EnableCircuitBreaker
 public class UserApplication {
+	/*
 	HystrixCommandProperties.Setter commandProperties=HystrixCommandProperties.Setter().withCircuitBreakerEnabled(true)
 			.withCircuitBreakerForceOpen(false)
 			.withCircuitBreakerForceClosed(false)
 			.withCircuitBreakerErrorThresholdPercentage(50)
 			.withCircuitBreakerRequestVolumeThreshold(20)
 			.withCircuitBreakerSleepWindowInMilliseconds(5000);
+			*/
 	public static void main(String[] args) {
 		new SpringApplicationBuilder(UserApplication.class).web(true).run(args);
 	}
